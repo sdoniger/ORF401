@@ -1,0 +1,13 @@
+body {
+  font-family: 'Comic Sans MS', sans-serif; /* Correct font-family name */
+  background-color: #FF0000;
+}
+
+.header {
+    background-color: #FF0000; /* Bootstrap primary blue, for example */
+    color: #ffffff; /* White text color */
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important; /* Ensuring the text color is white for navigation items */
+}

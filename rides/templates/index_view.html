@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+<style>
+    .search-row {
+        margin-bottom: 20px;
+    }
+
+    /* Style the input fields */
+    input[type="text"] {
+        width: 200px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    /* Style the labels */
+    label {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+</style>
+
+
+{% block content %}
+<div class="main">
+
+    <div class="row">
+        <div class="col-md-2">
+            <a href="https://draftkings.com" target="_blank"><img src="{% static 'ads/Ad-left.jpg' %}" width="200"></a>
+        </div>
+        <div class="col-md-8">
+            <form id="RideForm" action="{% url 'rides:index' %}" method="get">
+                {% csrf_token %}
+                <div class="mb-3">
+                   <label for="origination_city">Origination City</label><input class="form-control" name="origination_city" id="id_origination_city" type="text">
+                </div>
+                <div class="mb-3">
+                    <label for="origination_state">Origination State</label><input class="form-control" name="origination_state" id="id_origination_state" type="text">
+                </div>
+                <div class="mb-3">
+                    <label for="destination_city">Destination City</label><input class="form-control" name="destination_city" maxlength="64" id="id_destination_city" type="text">
+                </div>
+                <div class="mb-3">
+                    <label for="destination_state">Destination State</label><input class="form-control" name="destination_state" id="id_destination_state" type="text">
+                </div>
+                <button type="submit" onclick="return checkForm()">Submit</button>
+            </form>
+            <div class="table-responsive">
+            <table class="rides-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Origination City</th>
+                        <th>Origination State</th>
+                        <th>Destination City</th>
+                        <th>Destination State</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Taking Passengers</th>
+                        <th>Seats Available</th>
+                        <th>Vehicle Type</th>
+                        <th>Gas Contribution Request</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for person in people %}
+                    <tr>
+                        <td>{{ person.first_name }}</td>
+                        <td>{{ person.last_name }}</td>
+                        <td>{{ person.origination_city }}</td>
+                        <td>{{ person.origination_state }}</td>
+                        <td>{{ person.destination_city }}</td>
+                        <td>{{ person.destination_state }}</td>
+                        <td>{{ person.date }}</td>
+                        <td>{{ person.time }}</td>
+                        <td>{{ person.taking_passengers }}</td>
+                        <td>{{ person.seats_available }}</td>
+                        <td>{{ person.vehicle_type }}</td>
+                        <td>{{ person.gas_contribution_request }}</td>
+
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="8">No results found.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a href="https://draftkings.com" target="_blank"><img src="{% static 'ads/AD-RIGHT.gif' %}" width="200"></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

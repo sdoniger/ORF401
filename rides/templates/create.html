@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Add a New Ride</h2>
+  <form action="{% url 'rides:create' %}" method="POST">
+    {% csrf_token %}
+    <!-- Add form fields for new ride details -->
+    <div class="form-group">
+      <label for="destination">Destination:</label>
+      <input type="text" class="form-control" id="destination" name="destination" required>
+    </div>
+    <!-- Include additional fields as needed, such as origination, date, time, seats available, etc. -->
+    <button type="submit" class="btn btn-primary">Submit Ride</button>
+  </form>
+  <a href="/rides">Back to Main Page</a>
+</div>
+
+{% endblock %}
